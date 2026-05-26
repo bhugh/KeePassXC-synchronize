@@ -13,15 +13,16 @@ The batch file contains the logic to do these synchronizations, while updating a
 and doing nothing when neither file has changed.
 
 I store the script as a windows batch file located in my documents directory (other locations are possible) and
-then call it regularly using Windows Task Scheduler.
+then call it regularly using Windows Task Scheduler. Here is how I set up the schedule in Windows Task Scheduler:
 
-A Task Scheduler trigger sets the script to run once at day at a certain time
- - Trigger is "On a schedule" "Daily" at a certain time. Then under "Advanced Settings" below, repeat task every "5 minutes" for a duration "1 day".
+ - A Task Scheduler trigger sets the script to run once at day at a certain time. So the Trigger is "On a schedule" "Daily" at a certain time. Then under "Advanced Settings" below that, repeat task every "5 minutes" for a duration "1 day".
  - Thus it starts once a day and then repeats every 5 minutes throughout the day.  The next day it restarts and runs every 5 minutes again.
  - Setting up the schedule this way ensures the script runs regularly throughout the day every day.
 
-If there are no changes to either file, the script simply exits.  Thus it can be run every 5 minutes, 10, 30 or whatever you like, because most of the time it simply checks the hashes of the database files, then exits.
+If there are no changes to either file, the script simply exits very quickly.  Thus it can be run every 5 minutes, 10, 30 or whatever you like, because most of the time it simply checks the hashes of the database files, then exits.
 Only when changes have been made does it actually synchronize the files.
+
+The script can also be run manually from the command line, which is helpful for setup, testing, and troubleshooting.
 
 If anything goes wrong in the synchronization (error returned by KeePassXC-cli) the script reverts to a backup copy of the files it made before starting.   
 
