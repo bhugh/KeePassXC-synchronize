@@ -8,21 +8,21 @@ setlocal enabledelayedexpansion
 :: and keep those two always in sync.
 ::
 :: I store this as a windows batch file located in my documents directory and
-:: then call it regularly using windows Task Scheduler
+:: then call it regularly using Windows Task Scheduler:
 ::
-:: A Task Scheduler trigger sets the script to run once at day at a certain time
+::  - A Task Scheduler trigger sets the script to run once at day at a certain time
 ::  - Trigger is "On a schedule" "Daily" at a certain time. Then under "Advanced Settings" below, repeat task every "5 minutes" for a duration "1 day".
 ::  - Thus it starts once a day and then repeats every 5 minutes throughout the day.  The next day it restarts and runs every 5 minutes again
 ::  - If there are no changes to either file, the script simply exits.  Thus it can be run every 5 minutes, 10, 30 or whatever you like.
 ::
-:: It saves a log file with records of updates, and which direction, as well as errors in Documents/KeePassAutomergeLogs
+:: It saves a log file with records of updates, and which direction, as well as errors in Documents/KeePassAutomergeLogs - the log file has a max size of 1M. 
 ::
-:: It could be set up to synchronize the database held in any two virtual drives - Microsoft, Dropbox, Google Drive, SeaDrive, NextCloud, etc etc
+:: It could be set up to synchronize the database held in any two virtual drives or locations, settable below - Microsoft, Dropbox, Google Drive, SeaDrive, NextCloud, etc etc
 ::
 :: If it needs to update the "main" database, the one opened by KeePassXC GUI (and here, the Google Drive database), then it 
-:: closes the KeePassXC GUI, then reopens it again afterwards, minimized to the try
-:: To do that (or any of the other merges etc) below, you will need a password-protect database - keyfiles might be possible by altering the respective keepassxc-cli.exe lines below
-:: When opening the KeePassXC GUI minimized to the tray, it also opens the DB with the password (see below) because that is what I prefer.  You can edit below to change this behavior.
+:: closes the KeePassXC GUI, then reopens it again afterwards, minimized to the tray.
+:: To do that (i.e., close & open the GUI - or do any of the other merges) below, you will need a ***password*** protected database, and enter the password below.  Use of a keyfile might be possible by altering the respective keepassxc-cli.exe lines below.
+:: When opening the KeePassXC GUI minimized to the tray, it also opens the DB with the password, so that it is ready to just "click and use" afterwards - because that is what I prefer.  You can edit below to change this behavior.
 ::
 :: Password is saved as a variable below - there are other ways to do it that may be more secure, but that is the simplest.
 
